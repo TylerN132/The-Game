@@ -64,18 +64,6 @@
         .choice-container button {
             display: block;
             width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #222;
-            color: #ff4444;
-            border: 2px solid #ff4444;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .choice-container button:hover {
-            background-color: #ff4444;
-            color: #222;
         }
 
         /* Typewriter effect for story text */
@@ -131,15 +119,26 @@
 
     <section id="game-container" class="container">
         <h2>Game Started!</h2>
-        <p id="game-text">The game will appear here.</p>
-        <div id="choices" class="choice-container"></div>
+        <p>Make your choice:</p>
+        <div class="choice-container">
+            <button onclick="makeChoice('option1')">Option 1</button>
+            <button onclick="makeChoice('option2')">Option 2</button>
+        </div>
     </section>
 
     <footer>
         <p>© 2023 The Game. All rights reserved.</p>
     </footer>
 
-    <script src="game.js"></script>
+    <script>
+        function startGame() {
+            document.getElementById("game-container").style.display = "block";
+        }
+
+        function makeChoice(choice) {
+            alert("You chose: " + choice);
+        }
+    </script>
 
 </body>
 </html>

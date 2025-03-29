@@ -80,14 +80,6 @@
             width: 0;
             animation: typewriter 3s steps(40, end) forwards;
         }
-
-        #game-container {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: rgba(30, 30, 30, 0.9);
-            border-radius: 10px;
-        }
     </style>
 </head>
 <body>
@@ -117,26 +109,13 @@
         <p>This is the contact section.</p>
     </section>
 
-    <section id="game-container" class="container">
-        <h2>Game Started!</h2>
-        <p>Make your choice:</p>
-        <div class="choice-container">
-            <button onclick="makeChoice('option1')">Option 1</button>
-            <button onclick="makeChoice('option2')">Option 2</button>
-        </div>
-    </section>
-
     <footer>
         <p>© 2023 The Game. All rights reserved.</p>
     </footer>
 
     <script>
         function startGame() {
-            document.getElementById("game-container").style.display = "block";
-        }
-
-        function makeChoice(choice) {
-            alert("You chose: " + choice);
+            alert("Game Starting!");
         }
     </script>
 

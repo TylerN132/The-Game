@@ -1,145 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to The Game</title>
-    <style>
-        body {
-            background-color: #0d0d0d;
-            color: #d4d4d4;
-            font-family: "Courier New", monospace;
-            text-align: center;
-            padding: 20px;
+<script>
+    // Game state
+    let gameState = {
+        currentStep: 0
+    };
+
+    // Story data
+    const story = [
+        {
+            text: "You awaken in a dark forest, a crisp brush of wind sends chills down your spine. Your head aches as you feel something drip down. Dazed, you look around and notice a light on the ground.",
+            choices: [
+                { text: "Crawl to the light", nextStep: 1 },
+                { text: "Check your head", nextStep: "gameOver" },
+                { text: "Yell for help", nextStep: "gameOver" }
+            ]
+        },
+        {
+            text: "You slowly crawl towards the mysterious light, unsure of what lies ahead. You find a flashlight on the ground and pick it up, revealing a corpse next to you and an overturned vehicle.",
+            choices: [
+                { text: "Check the corpse", nextStep: 2 },
+                { text: "Check the vehicle", nextStep: 3 },
+                { text: "Begin walking into the woods", nextStep: 4 }
+            ]
+        },
+        {
+            text: "You roll the corpse over to reveal a face half torn apart. The part of the face you can see is familiar, but you cannot recall who it is. In the corpse's pants is a wallet with a picture of the two of you.",
+            choices: [
+                { text: "Search the pockets", nextStep: 5 },
+                { text: "Back away slowly", nextStep: 6 }
+            ]
+        },
+        {
+            text: "You walk over to the overturned vehicle and notice it is a 1964 Mustang. You shine the light inside and begin looking for anything useful.",
+            choices: [
+                { text: "Check the glove compartment", nextStep: 7 },
+                { text: "Look under the seats", nextStep: 8 }
+            ]
+        }
+    ];
+
+    function startGame() {
+        document.getElementById("game-container").style.display = "block";
+        showStory(0);
+    }
+
+    function showStory(step) {
+        const gameText = document.getElementById("game-text");
+        const choicesDiv = document.getElementById("choices");
+        
+        // Check if game over
+        if (step === "gameOver") {
+            gameText.innerHTML = "You hesitated too long, and the darkness seems to grow around you... GAME OVER.";
+            choicesDiv.innerHTML = `<button onclick="startGame()">Restart</button>`;
+            return;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(20, 20, 20, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-        }
+        // Update story text
+        gameText.innerHTML = story[step].text;
 
-        h1 {
-            font-size: 28px;
-            color: #ff4444;
-            text-shadow: 2px 2px 5px rgba(255, 68, 68, 0.5);
-        }
+        // Clear old choices
+        choicesDiv.innerHTML = "";
 
-        p {
-            font-size: 18px;
-            line-height: 1.6;
-        }
-
-        nav a {
-            margin: 0 15px;
-            text-decoration: none;
-            color: #ff4444;
-        }
-
-        .start-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 18px;
-            color: #ff4444;
-            background-color: #222;
-            border: 2px solid #ff4444;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .start-button:hover {
-            background-color: #ff4444;
-            color: #222;
-        }
-
-        .choice-container {
-            margin-top: 20px;
-        }
-
-        .choice-container button {
-            display: block;
-            width: 100%;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #222;
-            color: #ff4444;
-            border: 2px solid #ff4444;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .choice-container button:hover {
-            background-color: #ff4444;
-            color: #222;
-        }
-
-        /* Typewriter effect for story text */
-        @keyframes typewriter {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        .typewriter {
-            display: inline-block;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 2px solid #ff4444;
-            width: 0;
-            animation: typewriter 3s steps(40, end) forwards;
-        }
-
-        #game-container {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: rgba(30, 30, 30, 0.9);
-            border-radius: 10px;
-        }
-    </style>
-</head>
-<body>
-
-    <h1 class="typewriter">Welcome to The Game</h1>
-
-    <button class="start-button" onclick="startGame()">Start Game</button>
-
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
-    <section id="home" class="container">
-        <h2>Home</h2>
-        <p>This is the home section.</p>
-    </section>
-
-    <section id="about" class="container">
-        <h2>About</h2>
-        <p>This is my first pet project. I have always been interested in video games, so I wanted to start off basic.</p>
-    </section>
-
-    <section id="contact" class="container">
-        <h2>Contact</h2>
-        <p>This is the contact section.</p>
-    </section>
-
-    <section id="game-container" class="container">
-        <h2>Game Started!</h2>
-        <p id="game-text">The game will appear here.</p>
-        <div id="choices" class="choice-container"></div>
-    </section>
-
-    <footer>
-        <p>© 2023 The Game. All rights reserved.</p>
-    </footer>
-
-    <script src="game.js"></script>
-
-</body>
-</html>
+        // Add new choices
+        story[step].choices.forEach(choice => {
+            const button = document.createElement("button");
+            button.innerText = choice.text;
+            button.onclick = () => showStory(choice.nextStep);
+            choicesDiv.appendChild(button);
+        });
+    }
+</script>

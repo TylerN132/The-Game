@@ -14,11 +14,27 @@
             text-decoration: none;
             color: blue;
         }
+        .start-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: green;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .start-button:hover {
+            background-color: darkgreen;
+        }
     </style>
 </head>
 <body>
 
     <h1>Welcome to The Game</h1>
+
+    <button class="start-button" onclick="startGame()">Start Game</button>
 
     <nav>
         <a href="#home">Home</a>
@@ -44,6 +60,12 @@
     <footer>
         <p>© 2023 The Game. All rights reserved.</p>
     </footer>
+
+    <script>
+        function startGame() {
+            alert("Game Starting!");
+        }
+    </script>
 
 </body>
 </html>
